@@ -3,9 +3,11 @@ title: Admin API Documentation v2
 language_tabs:
   - http: HTTP
   - python: PYTHON
+  - csharp: CSHARP
 language_clients:
   - http: ""
   - python: ""
+  - csharp: ""
 toc_footers: []
 includes: []
 search: false
@@ -57,6 +59,64 @@ r = requests.get('/v2/resourceClaims', params={
 }, headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/resourceClaims";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -144,6 +204,64 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/resourceClaims/{id}";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `GET /v2/resourceClaims/{id}`
 
 <h3 id="retrieves-a-specific-resourceclaim-based-on-the-identifier.-parameters">Parameters</h3>
@@ -214,6 +332,64 @@ r = requests.get('/v2/vendors', params={
 }, headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/vendors";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -301,6 +477,83 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    /// Make a dummy request
+    public async Task MakePostRequest()
+    {
+      string url = "/v2/vendors";
+      
+      string json = @"{
+  ""company"": ""string"",
+  ""namespacePrefixes"": ""string"",
+  ""contactName"": ""string"",
+  ""contactEmailAddress"": ""string""
+}";
+      EdFi.Ods.AdminApi.Features.Vendors.AddVendor.Request content = JsonConvert.DeserializeObject(json);
+      await PostAsync(content, url);
+      
+      
+    }
+
+    /// Performs a POST Request
+    public async Task PostAsync(EdFi.Ods.AdminApi.Features.Vendors.AddVendor.Request content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute POST request
+        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
+    }
+    
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(EdFi.Ods.AdminApi.Features.Vendors.AddVendor.Request content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `POST /v2/vendors`
 
 > Body parameter
@@ -356,6 +609,64 @@ headers = {
 r = requests.get('/v2/vendors/{id}', headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/vendors/{id}";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -420,6 +731,88 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakePutRequest()
+    {
+      int id = 1;
+      string url = "/v2/vendors/{id}";
+
+      
+      string json = @"{
+  ""company"": ""string"",
+  ""namespacePrefixes"": ""string"",
+  ""contactName"": ""string"",
+  ""contactEmailAddress"": ""string""
+}";
+      EdFi.Ods.AdminApi.Features.Vendors.EditVendor.Request content = JsonConvert.DeserializeObject(json);
+      var result = await PutAsync(id, content, url);
+      
+          
+    }
+
+    /// Performs a PUT Request
+    public async Task PutAsync(int id, EdFi.Ods.AdminApi.Features.Vendors.EditVendor.Request content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute PUT request
+        HttpResponseMessage response = await Client.PutAsync(url + $"/{id}", jsonContent);
+
+        //Return response
+        return await DeserializeObject(response);
+    }
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(EdFi.Ods.AdminApi.Features.Vendors.EditVendor.Request content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `PUT /v2/vendors/{id}`
 
 > Body parameter
@@ -477,6 +870,65 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakeDeleteRequest()
+    {
+      int id = 1;
+      string url = "/v2/vendors/{id}";
+
+      await DeleteAsync(id, url);
+    }
+
+    /// Performs a DELETE Request
+    public async Task DeleteAsync(int id, string url)
+    {
+        //Execute DELETE request
+        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
+
+        //Return response
+        await DeserializeObject(response);
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `DELETE /v2/vendors/{id}`
 
 <h3 id="deletes-an-existing-vendor-using-the-resource-identifier.-parameters">Parameters</h3>
@@ -521,6 +973,64 @@ headers = {
 r = requests.get('/v2/vendors/{id}/applications', headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/vendors/{id}/applications";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -615,6 +1125,64 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/profiles";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `GET /v2/profiles`
 
 <h3 id="retrieves-all-profiles.-parameters">Parameters</h3>
@@ -690,6 +1258,81 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    /// Make a dummy request
+    public async Task MakePostRequest()
+    {
+      string url = "/v2/profiles";
+      
+      string json = @"{
+  ""name"": ""Test-Profile"",
+  ""definition"": ""<Profile name=\""Test-Profile\""><Resource name=\""Resource1\""><ReadContentType memberSelection=\""IncludeOnly\""><Collection name=\""Collection1\"" memberSelection=\""IncludeOnly\""><Property name=\""Property1\"" /><Property name=\""Property2\"" /></Collection></ReadContentType><WriteContentType memberSelection=\""IncludeOnly\""><Collection name=\""Collection2\"" memberSelection=\""IncludeOnly\""><Property name=\""Property1\"" /><Property name=\""Property2\"" /></Collection></WriteContentType></Resource></Profile>""
+}";
+      EdFi.Ods.AdminApi.Features.Profiles.AddProfile.AddProfileRequest content = JsonConvert.DeserializeObject(json);
+      await PostAsync(content, url);
+      
+      
+    }
+
+    /// Performs a POST Request
+    public async Task PostAsync(EdFi.Ods.AdminApi.Features.Profiles.AddProfile.AddProfileRequest content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute POST request
+        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
+    }
+    
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(EdFi.Ods.AdminApi.Features.Profiles.AddProfile.AddProfileRequest content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `POST /v2/profiles`
 
 > Body parameter
@@ -740,6 +1383,64 @@ headers = {
 r = requests.get('/v2/profiles/{id}', headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/profiles/{id}";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -802,6 +1503,86 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakePutRequest()
+    {
+      int id = 1;
+      string url = "/v2/profiles/{id}";
+
+      
+      string json = @"{
+  ""name"": ""Test-Profile"",
+  ""definition"": ""<Profile name=\""Test-Profile\""><Resource name=\""Resource1\""><ReadContentType memberSelection=\""IncludeOnly\""><Collection name=\""Collection1\"" memberSelection=\""IncludeOnly\""><Property name=\""Property1\"" /><Property name=\""Property2\"" /></Collection></ReadContentType><WriteContentType memberSelection=\""IncludeOnly\""><Collection name=\""Collection2\"" memberSelection=\""IncludeOnly\""><Property name=\""Property1\"" /><Property name=\""Property2\"" /></Collection></WriteContentType></Resource></Profile>""
+}";
+      EdFi.Ods.AdminApi.Features.Profiles.EditProfile.EditProfileRequest content = JsonConvert.DeserializeObject(json);
+      var result = await PutAsync(id, content, url);
+      
+          
+    }
+
+    /// Performs a PUT Request
+    public async Task PutAsync(int id, EdFi.Ods.AdminApi.Features.Profiles.EditProfile.EditProfileRequest content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute PUT request
+        HttpResponseMessage response = await Client.PutAsync(url + $"/{id}", jsonContent);
+
+        //Return response
+        return await DeserializeObject(response);
+    }
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(EdFi.Ods.AdminApi.Features.Profiles.EditProfile.EditProfileRequest content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `PUT /v2/profiles/{id}`
 
 > Body parameter
@@ -854,6 +1635,65 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakeDeleteRequest()
+    {
+      int id = 1;
+      string url = "/v2/profiles/{id}";
+
+      await DeleteAsync(id, url);
+    }
+
+    /// Performs a DELETE Request
+    public async Task DeleteAsync(int id, string url)
+    {
+        //Execute DELETE request
+        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
+
+        //Return response
+        await DeserializeObject(response);
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `DELETE /v2/profiles/{id}`
 
 <h3 id="deletes-an-existing-profile-using-the-resource-identifier.-parameters">Parameters</h3>
@@ -902,6 +1742,64 @@ r = requests.get('/v2/odsInstances', params={
 }, headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/odsInstances";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -982,6 +1880,82 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    /// Make a dummy request
+    public async Task MakePostRequest()
+    {
+      string url = "/v2/odsInstances";
+      
+      string json = @"{
+  ""name"": ""string"",
+  ""instanceType"": ""string"",
+  ""connectionString"": ""string""
+}";
+      EdFi.Ods.AdminApi.Features.OdsInstances.AddOdsInstance.AddOdsInstanceRequest content = JsonConvert.DeserializeObject(json);
+      await PostAsync(content, url);
+      
+      
+    }
+
+    /// Performs a POST Request
+    public async Task PostAsync(EdFi.Ods.AdminApi.Features.OdsInstances.AddOdsInstance.AddOdsInstanceRequest content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute POST request
+        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
+    }
+    
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(EdFi.Ods.AdminApi.Features.OdsInstances.AddOdsInstance.AddOdsInstanceRequest content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `POST /v2/odsInstances`
 
 > Body parameter
@@ -1036,6 +2010,64 @@ headers = {
 r = requests.get('/v2/odsInstances/{id}', headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/odsInstances/{id}";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -1113,6 +2145,87 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakePutRequest()
+    {
+      int id = 1;
+      string url = "/v2/odsInstances/{id}";
+
+      
+      string json = @"{
+  ""name"": ""string"",
+  ""instanceType"": ""string"",
+  ""connectionString"": ""string""
+}";
+      EdFi.Ods.AdminApi.Features.OdsInstances.EditOdsInstance.EditOdsInstanceRequest content = JsonConvert.DeserializeObject(json);
+      var result = await PutAsync(id, content, url);
+      
+          
+    }
+
+    /// Performs a PUT Request
+    public async Task PutAsync(int id, EdFi.Ods.AdminApi.Features.OdsInstances.EditOdsInstance.EditOdsInstanceRequest content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute PUT request
+        HttpResponseMessage response = await Client.PutAsync(url + $"/{id}", jsonContent);
+
+        //Return response
+        return await DeserializeObject(response);
+    }
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(EdFi.Ods.AdminApi.Features.OdsInstances.EditOdsInstance.EditOdsInstanceRequest content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `PUT /v2/odsInstances/{id}`
 
 > Body parameter
@@ -1169,6 +2282,65 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakeDeleteRequest()
+    {
+      int id = 1;
+      string url = "/v2/odsInstances/{id}";
+
+      await DeleteAsync(id, url);
+    }
+
+    /// Performs a DELETE Request
+    public async Task DeleteAsync(int id, string url)
+    {
+        //Execute DELETE request
+        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
+
+        //Return response
+        await DeserializeObject(response);
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `DELETE /v2/odsInstances/{id}`
 
 <h3 id="deletes-an-existing-odsinstance-using-the-resource-identifier.-parameters">Parameters</h3>
@@ -1213,6 +2385,64 @@ headers = {
 r = requests.get('/v2/odsInstances/{id}/applications', headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/odsInstances/{id}/applications";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -1307,6 +2537,64 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/odsInstanceDerivatives";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `GET /v2/odsInstanceDerivatives`
 
 <h3 id="retrieves-all-odsinstancederivatives.-parameters">Parameters</h3>
@@ -1380,6 +2668,82 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    /// Make a dummy request
+    public async Task MakePostRequest()
+    {
+      string url = "/v2/odsInstanceDerivatives";
+      
+      string json = @"{
+  ""odsInstanceId"": 0,
+  ""derivativeType"": ""string"",
+  ""connectionString"": ""string""
+}";
+      EdFi.Ods.AdminApi.Features.OdsInstanceDerivative.AddOdsInstanceDerivative.AddOdsInstanceDerivativeRequest content = JsonConvert.DeserializeObject(json);
+      await PostAsync(content, url);
+      
+      
+    }
+
+    /// Performs a POST Request
+    public async Task PostAsync(EdFi.Ods.AdminApi.Features.OdsInstanceDerivative.AddOdsInstanceDerivative.AddOdsInstanceDerivativeRequest content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute POST request
+        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
+    }
+    
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(EdFi.Ods.AdminApi.Features.OdsInstanceDerivative.AddOdsInstanceDerivative.AddOdsInstanceDerivativeRequest content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `POST /v2/odsInstanceDerivatives`
 
 > Body parameter
@@ -1434,6 +2798,64 @@ headers = {
 r = requests.get('/v2/odsInstanceDerivatives/{id}', headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/odsInstanceDerivatives/{id}";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -1496,6 +2918,87 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakePutRequest()
+    {
+      int id = 1;
+      string url = "/v2/odsInstanceDerivatives/{id}";
+
+      
+      string json = @"{
+  ""odsInstanceId"": 0,
+  ""derivativeType"": ""string"",
+  ""connectionString"": ""string""
+}";
+      EdFi.Ods.AdminApi.Features.OdsInstanceDerivative.EditOdsInstanceDerivative.EditOdsInstanceDerivativeRequest content = JsonConvert.DeserializeObject(json);
+      var result = await PutAsync(id, content, url);
+      
+          
+    }
+
+    /// Performs a PUT Request
+    public async Task PutAsync(int id, EdFi.Ods.AdminApi.Features.OdsInstanceDerivative.EditOdsInstanceDerivative.EditOdsInstanceDerivativeRequest content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute PUT request
+        HttpResponseMessage response = await Client.PutAsync(url + $"/{id}", jsonContent);
+
+        //Return response
+        return await DeserializeObject(response);
+    }
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(EdFi.Ods.AdminApi.Features.OdsInstanceDerivative.EditOdsInstanceDerivative.EditOdsInstanceDerivativeRequest content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `PUT /v2/odsInstanceDerivatives/{id}`
 
 > Body parameter
@@ -1552,6 +3055,65 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakeDeleteRequest()
+    {
+      int id = 1;
+      string url = "/v2/odsInstanceDerivatives/{id}";
+
+      await DeleteAsync(id, url);
+    }
+
+    /// Performs a DELETE Request
+    public async Task DeleteAsync(int id, string url)
+    {
+        //Execute DELETE request
+        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
+
+        //Return response
+        await DeserializeObject(response);
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `DELETE /v2/odsInstanceDerivatives/{id}`
 
 <h3 id="deletes-an-existing-odsinstancederivative-using-the-resource-identifier.-parameters">Parameters</h3>
@@ -1600,6 +3162,64 @@ r = requests.get('/v2/odsInstanceContexts', params={
 }, headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/odsInstanceContexts";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -1678,6 +3298,82 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    /// Make a dummy request
+    public async Task MakePostRequest()
+    {
+      string url = "/v2/odsInstanceContexts";
+      
+      string json = @"{
+  ""odsInstanceId"": 0,
+  ""contextKey"": ""string"",
+  ""contextValue"": ""string""
+}";
+      EdFi.Ods.AdminApi.Features.OdsInstanceContext.AddOdsInstanceContext.AddOdsInstanceContextRequest content = JsonConvert.DeserializeObject(json);
+      await PostAsync(content, url);
+      
+      
+    }
+
+    /// Performs a POST Request
+    public async Task PostAsync(EdFi.Ods.AdminApi.Features.OdsInstanceContext.AddOdsInstanceContext.AddOdsInstanceContextRequest content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute POST request
+        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
+    }
+    
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(EdFi.Ods.AdminApi.Features.OdsInstanceContext.AddOdsInstanceContext.AddOdsInstanceContextRequest content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `POST /v2/odsInstanceContexts`
 
 > Body parameter
@@ -1732,6 +3428,64 @@ headers = {
 r = requests.get('/v2/odsInstanceContexts/{id}', headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/odsInstanceContexts/{id}";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -1795,6 +3549,87 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakePutRequest()
+    {
+      int id = 1;
+      string url = "/v2/odsInstanceContexts/{id}";
+
+      
+      string json = @"{
+  ""odsInstanceId"": 0,
+  ""contextKey"": ""string"",
+  ""contextValue"": ""string""
+}";
+      EdFi.Ods.AdminApi.Features.OdsInstanceContext.EditOdsInstanceContext.EditOdsInstanceContextRequest content = JsonConvert.DeserializeObject(json);
+      var result = await PutAsync(id, content, url);
+      
+          
+    }
+
+    /// Performs a PUT Request
+    public async Task PutAsync(int id, EdFi.Ods.AdminApi.Features.OdsInstanceContext.EditOdsInstanceContext.EditOdsInstanceContextRequest content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute PUT request
+        HttpResponseMessage response = await Client.PutAsync(url + $"/{id}", jsonContent);
+
+        //Return response
+        return await DeserializeObject(response);
+    }
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(EdFi.Ods.AdminApi.Features.OdsInstanceContext.EditOdsInstanceContext.EditOdsInstanceContextRequest content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `PUT /v2/odsInstanceContexts/{id}`
 
 > Body parameter
@@ -1851,6 +3686,65 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakeDeleteRequest()
+    {
+      int id = 1;
+      string url = "/v2/odsInstanceContexts/{id}";
+
+      await DeleteAsync(id, url);
+    }
+
+    /// Performs a DELETE Request
+    public async Task DeleteAsync(int id, string url)
+    {
+        //Execute DELETE request
+        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
+
+        //Return response
+        await DeserializeObject(response);
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `DELETE /v2/odsInstanceContexts/{id}`
 
 <h3 id="deletes-an-existing-odsinstancecontext-using-the-resource-identifier.-parameters">Parameters</h3>
@@ -1897,6 +3791,64 @@ headers = {
 r = requests.get('/v2/claimSets/{id}', headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/claimSets/{id}";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -2045,6 +3997,64 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/claimSets";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `GET /v2/claimSets`
 
 <h3 id="retrieves-all-claimsets.-parameters">Parameters</h3>
@@ -2130,6 +4140,86 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    /// Make a dummy request
+    public async Task MakePostRequest()
+    {
+      string url = "/v2/claimSets/{claimSetId}/resourceClaimActions";
+      
+      string json = @"{
+  ""resourceClaimId"": 0,
+  ""resourceClaimActions"": [
+    {
+      ""name"": ""string"",
+      ""enabled"": true
+    }
+  ]
+}";
+      EdFi.Ods.AdminApi.Features.ClaimSets.ResourceClaims.EditResourceClaimActions.AddResourceClaimOnClaimSetRequest content = JsonConvert.DeserializeObject(json);
+      await PostAsync(content, url);
+      
+      
+    }
+
+    /// Performs a POST Request
+    public async Task PostAsync(EdFi.Ods.AdminApi.Features.ClaimSets.ResourceClaims.EditResourceClaimActions.AddResourceClaimOnClaimSetRequest content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute POST request
+        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
+    }
+    
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(EdFi.Ods.AdminApi.Features.ClaimSets.ResourceClaims.EditResourceClaimActions.AddResourceClaimOnClaimSetRequest content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `POST /v2/claimSets/{claimSetId}/resourceClaimActions`
 
 > Body parameter
@@ -2193,6 +4283,90 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakePutRequest()
+    {
+      int id = 1;
+      string url = "/v2/claimSets/{claimSetId}/resourceClaimActions/{resourceClaimId}";
+
+      
+      string json = @"{
+  ""resourceClaimActions"": [
+    {
+      ""name"": ""string"",
+      ""enabled"": true
+    }
+  ]
+}";
+      EdFi.Ods.AdminApi.Features.ClaimSets.ResourceClaims.EditResourceClaimActions.EditResourceClaimOnClaimSetRequest content = JsonConvert.DeserializeObject(json);
+      var result = await PutAsync(id, content, url);
+      
+          
+    }
+
+    /// Performs a PUT Request
+    public async Task PutAsync(int id, EdFi.Ods.AdminApi.Features.ClaimSets.ResourceClaims.EditResourceClaimActions.EditResourceClaimOnClaimSetRequest content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute PUT request
+        HttpResponseMessage response = await Client.PutAsync(url + $"/{id}", jsonContent);
+
+        //Return response
+        return await DeserializeObject(response);
+    }
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(EdFi.Ods.AdminApi.Features.ClaimSets.ResourceClaims.EditResourceClaimActions.EditResourceClaimOnClaimSetRequest content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `PUT /v2/claimSets/{claimSetId}/resourceClaimActions/{resourceClaimId}`
 
 > Body parameter
@@ -2253,6 +4427,65 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakeDeleteRequest()
+    {
+      int id = 1;
+      string url = "/v2/claimSets/{claimSetId}/resourceClaimActions/{resourceClaimId}";
+
+      await DeleteAsync(id, url);
+    }
+
+    /// Performs a DELETE Request
+    public async Task DeleteAsync(int id, string url)
+    {
+        //Execute DELETE request
+        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
+
+        //Return response
+        await DeserializeObject(response);
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `DELETE /v2/claimSets/{claimSetId}/resourceClaimActions/{resourceClaimId}`
 
 <h3 id="deletes-an-existing-claimset-using-the-resource-identifier.-parameters">Parameters</h3>
@@ -2300,6 +4533,64 @@ headers = {
 r = requests.get('/v2/authorizationStrategies', headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/authorizationStrategies";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -2370,6 +4661,64 @@ r = requests.get('/v2/applications', params={
 }, headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/applications";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -2467,6 +4816,91 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    /// Make a dummy request
+    public async Task MakePostRequest()
+    {
+      string url = "/v2/applications";
+      
+      string json = @"{
+  ""applicationName"": ""string"",
+  ""vendorId"": 0,
+  ""claimSetName"": ""string"",
+  ""profileIds"": [
+    0
+  ],
+  ""educationOrganizationIds"": [
+    0
+  ],
+  ""odsInstanceIds"": [
+    0
+  ]
+}";
+      EdFi.Ods.AdminApi.Features.Applications.AddApplication.Request content = JsonConvert.DeserializeObject(json);
+      await PostAsync(content, url);
+      
+      
+    }
+
+    /// Performs a POST Request
+    public async Task PostAsync(EdFi.Ods.AdminApi.Features.Applications.AddApplication.Request content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute POST request
+        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
+    }
+    
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(EdFi.Ods.AdminApi.Features.Applications.AddApplication.Request content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `POST /v2/applications`
 
 > Body parameter
@@ -2545,6 +4979,64 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/applications/{id}";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `GET /v2/applications/{id}`
 
 <h3 id="retrieves-a-specific-application-based-on-the-identifier.-parameters">Parameters</h3>
@@ -2614,6 +5106,96 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakePutRequest()
+    {
+      int id = 1;
+      string url = "/v2/applications/{id}";
+
+      
+      string json = @"{
+  ""applicationName"": ""string"",
+  ""vendorId"": 0,
+  ""claimSetName"": ""string"",
+  ""profileIds"": [
+    0
+  ],
+  ""educationOrganizationIds"": [
+    0
+  ],
+  ""odsInstanceIds"": [
+    0
+  ]
+}";
+      EdFi.Ods.AdminApi.Features.Applications.EditApplication.Request content = JsonConvert.DeserializeObject(json);
+      var result = await PutAsync(id, content, url);
+      
+          
+    }
+
+    /// Performs a PUT Request
+    public async Task PutAsync(int id, EdFi.Ods.AdminApi.Features.Applications.EditApplication.Request content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute PUT request
+        HttpResponseMessage response = await Client.PutAsync(url + $"/{id}", jsonContent);
+
+        //Return response
+        return await DeserializeObject(response);
+    }
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(EdFi.Ods.AdminApi.Features.Applications.EditApplication.Request content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `PUT /v2/applications/{id}`
 
 > Body parameter
@@ -2679,6 +5261,65 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakeDeleteRequest()
+    {
+      int id = 1;
+      string url = "/v2/applications/{id}";
+
+      await DeleteAsync(id, url);
+    }
+
+    /// Performs a DELETE Request
+    public async Task DeleteAsync(int id, string url)
+    {
+        //Execute DELETE request
+        HttpResponseMessage response = await Client.DeleteAsync(url + $"/{id}");
+
+        //Return response
+        await DeserializeObject(response);
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `DELETE /v2/applications/{id}`
 
 <h3 id="deletes-an-existing-application-using-the-resource-identifier.-parameters">Parameters</h3>
@@ -2723,6 +5364,81 @@ headers = {
 r = requests.put('/v2/applications/{id}/reset-credential', headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    
+    /// Make a dummy request
+    public async Task MakePutRequest()
+    {
+      int id = 1;
+      string url = "/v2/applications/{id}/reset-credential";
+
+      
+      
+      var result = await PutAsync(id, null, url);
+          
+    }
+
+    /// Performs a PUT Request
+    public async Task PutAsync(int id, undefined content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute PUT request
+        HttpResponseMessage response = await Client.PutAsync(url + $"/{id}", jsonContent);
+
+        //Return response
+        return await DeserializeObject(response);
+    }
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(undefined content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -2787,6 +5503,64 @@ r = requests.get('/v2/actions', params={
 }, headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/v2/actions";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -2869,6 +5643,64 @@ print(r.json())
 
 ```
 
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    /// Make a dummy request
+    public async Task MakeGetRequest()
+    {
+      string url = "/";
+      var result = await GetAsync(url);
+    }
+
+    /// Performs a GET Request
+    public async Task GetAsync(string url)
+    {
+        //Start the request
+        HttpResponseMessage response = await Client.GetAsync(url);
+
+        //Validate result
+        response.EnsureSuccessStatusCode();
+
+    }
+    
+    
+    
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
+
+```
+
 `GET /`
 
 > Example responses
@@ -2917,6 +5749,76 @@ headers = {
 r = requests.post('/connect/register', headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    /// Make a dummy request
+    public async Task MakePostRequest()
+    {
+      string url = "/connect/register";
+      
+      
+      await PostAsync(null, url);
+      
+    }
+
+    /// Performs a POST Request
+    public async Task PostAsync(undefined content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute POST request
+        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
+    }
+    
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(undefined content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
@@ -2976,6 +5878,76 @@ headers = {
 r = requests.post('/connect/token', headers = headers)
 
 print(r.json())
+
+```
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+/// <<summary>>
+/// Example of Http Client
+/// <</summary>>
+public class HttpExample
+{
+    private HttpClient Client { get; set; }
+
+    /// <<summary>>
+    /// Setup http client
+    /// <</summary>>
+    public HttpExample()
+    {
+      Client = new HttpClient();
+    }
+    
+    
+    /// Make a dummy request
+    public async Task MakePostRequest()
+    {
+      string url = "/connect/token";
+      
+      
+      await PostAsync(null, url);
+      
+    }
+
+    /// Performs a POST Request
+    public async Task PostAsync(undefined content, string url)
+    {
+        //Serialize Object
+        StringContent jsonContent = SerializeObject(content);
+
+        //Execute POST request
+        HttpResponseMessage response = await Client.PostAsync(url, jsonContent);
+    }
+    
+    
+    
+    /// Serialize an object to Json
+    private StringContent SerializeObject(undefined content)
+    {
+        //Serialize Object
+        string jsonObject = JsonConvert.SerializeObject(content);
+
+        //Create Json UTF8 String Content
+        return new StringContent(jsonObject, Encoding.UTF8, "application/json");
+    }
+    
+    /// Deserialize object from request response
+    private async Task DeserializeObject(HttpResponseMessage response)
+    {
+        //Read body 
+        string responseBody = await response.Content.ReadAsStringAsync();
+
+        //Deserialize Body to object
+        var result = JsonConvert.DeserializeObject(responseBody);
+    }
+}
 
 ```
 
