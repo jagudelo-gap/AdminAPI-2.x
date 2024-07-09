@@ -35,6 +35,15 @@ public class SwaggerDefaultParameterFilter : IOperationFilter
                 parameter.Description = "Indicates the maximum number of items that should be returned in the results.";
                 parameter.Schema.Default = new OpenApiString(_settings.Value.DefaultPageSizeLimit.ToString());
             }
+            else if (parameter.Name.ToLower().Equals("sortBy"))
+            {
+                parameter.Description = "Indicates the property name by which the results will be sorted.";
+            }
+            else if (parameter.Name.ToLower().Equals("descendingSorting"))
+            {
+                parameter.Description = "Indicates whether the result should be sorted in descending order.";
+                parameter.Schema.Default = new OpenApiString(false.ToString());
+            }
         }
 
         switch (context.MethodInfo.Name)

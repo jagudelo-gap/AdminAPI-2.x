@@ -2,8 +2,10 @@
 title: Admin API Documentation v2
 language_tabs:
   - http: HTTP
+  - python: PYTHON
 language_clients:
   - http: ""
+  - python: ""
 toc_footers: []
 includes: []
 search: false
@@ -40,6 +42,21 @@ headingLevel: 2
 GET /v2/resourceClaims?offset=0&limit=25 HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/resourceClaims', params={
+  'offset': '0',  'limit': '25'
+}, headers = headers)
+
+print(r.json())
 
 ```
 
@@ -114,6 +131,19 @@ Accept: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/resourceClaims/{id}', headers = headers)
+
+print(r.json())
+
+```
+
 `GET /v2/resourceClaims/{id}`
 
 <h3 id="retrieves-a-specific-resourceclaim-based-on-the-identifier.-parameters">Parameters</h3>
@@ -169,6 +199,21 @@ oauth ( Scopes: api )
 GET /v2/vendors?offset=0&limit=25 HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/vendors', params={
+  'offset': '0',  'limit': '25'
+}, headers = headers)
+
+print(r.json())
 
 ```
 
@@ -243,6 +288,19 @@ Content-Type: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('/v2/vendors', headers = headers)
+
+print(r.json())
+
+```
+
 `POST /v2/vendors`
 
 > Body parameter
@@ -285,6 +343,19 @@ oauth ( Scopes: api )
 GET /v2/vendors/{id} HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/vendors/{id}', headers = headers)
+
+print(r.json())
 
 ```
 
@@ -336,6 +407,19 @@ Content-Type: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.put('/v2/vendors/{id}', headers = headers)
+
+print(r.json())
+
+```
+
 `PUT /v2/vendors/{id}`
 
 > Body parameter
@@ -381,6 +465,18 @@ DELETE /v2/vendors/{id} HTTP/1.1
 
 ```
 
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('/v2/vendors/{id}', headers = headers)
+
+print(r.json())
+
+```
+
 `DELETE /v2/vendors/{id}`
 
 <h3 id="deletes-an-existing-vendor-using-the-resource-identifier.-parameters">Parameters</h3>
@@ -412,6 +508,19 @@ oauth ( Scopes: api )
 GET /v2/vendors/{id}/applications HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/vendors/{id}/applications', headers = headers)
+
+print(r.json())
 
 ```
 
@@ -491,6 +600,21 @@ Accept: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/profiles', params={
+  'offset': '0',  'limit': '25'
+}, headers = headers)
+
+print(r.json())
+
+```
+
 `GET /v2/profiles`
 
 <h3 id="retrieves-all-profiles.-parameters">Parameters</h3>
@@ -553,6 +677,19 @@ Content-Type: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('/v2/profiles', headers = headers)
+
+print(r.json())
+
+```
+
 `POST /v2/profiles`
 
 > Body parameter
@@ -590,6 +727,19 @@ oauth ( Scopes: api )
 GET /v2/profiles/{id} HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/profiles/{id}', headers = headers)
+
+print(r.json())
 
 ```
 
@@ -639,6 +789,19 @@ Content-Type: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.put('/v2/profiles/{id}', headers = headers)
+
+print(r.json())
+
+```
+
 `PUT /v2/profiles/{id}`
 
 > Body parameter
@@ -679,6 +842,18 @@ DELETE /v2/profiles/{id} HTTP/1.1
 
 ```
 
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('/v2/profiles/{id}', headers = headers)
+
+print(r.json())
+
+```
+
 `DELETE /v2/profiles/{id}`
 
 <h3 id="deletes-an-existing-profile-using-the-resource-identifier.-parameters">Parameters</h3>
@@ -712,6 +887,21 @@ oauth ( Scopes: api )
 GET /v2/odsInstances?offset=0&limit=25 HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/odsInstances', params={
+  'offset': '0',  'limit': '25'
+}, headers = headers)
+
+print(r.json())
 
 ```
 
@@ -779,6 +969,19 @@ Content-Type: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('/v2/odsInstances', headers = headers)
+
+print(r.json())
+
+```
+
 `POST /v2/odsInstances`
 
 > Body parameter
@@ -820,6 +1023,19 @@ oauth ( Scopes: api )
 GET /v2/odsInstances/{id} HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/odsInstances/{id}', headers = headers)
+
+print(r.json())
 
 ```
 
@@ -884,6 +1100,19 @@ Content-Type: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.put('/v2/odsInstances/{id}', headers = headers)
+
+print(r.json())
+
+```
+
 `PUT /v2/odsInstances/{id}`
 
 > Body parameter
@@ -928,6 +1157,18 @@ DELETE /v2/odsInstances/{id} HTTP/1.1
 
 ```
 
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('/v2/odsInstances/{id}', headers = headers)
+
+print(r.json())
+
+```
+
 `DELETE /v2/odsInstances/{id}`
 
 <h3 id="deletes-an-existing-odsinstance-using-the-resource-identifier.-parameters">Parameters</h3>
@@ -959,6 +1200,19 @@ oauth ( Scopes: api )
 GET /v2/odsInstances/{id}/applications HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/odsInstances/{id}/applications', headers = headers)
+
+print(r.json())
 
 ```
 
@@ -1038,6 +1292,21 @@ Accept: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/odsInstanceDerivatives', params={
+  'offset': '0',  'limit': '25'
+}, headers = headers)
+
+print(r.json())
+
+```
+
 `GET /v2/odsInstanceDerivatives`
 
 <h3 id="retrieves-all-odsinstancederivatives.-parameters">Parameters</h3>
@@ -1098,6 +1367,19 @@ Content-Type: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('/v2/odsInstanceDerivatives', headers = headers)
+
+print(r.json())
+
+```
+
 `POST /v2/odsInstanceDerivatives`
 
 > Body parameter
@@ -1139,6 +1421,19 @@ oauth ( Scopes: api )
 GET /v2/odsInstanceDerivatives/{id} HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/odsInstanceDerivatives/{id}', headers = headers)
+
+print(r.json())
 
 ```
 
@@ -1188,6 +1483,19 @@ Content-Type: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.put('/v2/odsInstanceDerivatives/{id}', headers = headers)
+
+print(r.json())
+
+```
+
 `PUT /v2/odsInstanceDerivatives/{id}`
 
 > Body parameter
@@ -1232,6 +1540,18 @@ DELETE /v2/odsInstanceDerivatives/{id} HTTP/1.1
 
 ```
 
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('/v2/odsInstanceDerivatives/{id}', headers = headers)
+
+print(r.json())
+
+```
+
 `DELETE /v2/odsInstanceDerivatives/{id}`
 
 <h3 id="deletes-an-existing-odsinstancederivative-using-the-resource-identifier.-parameters">Parameters</h3>
@@ -1265,6 +1585,21 @@ oauth ( Scopes: api )
 GET /v2/odsInstanceContexts?offset=0&limit=25 HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/odsInstanceContexts', params={
+  'offset': '0',  'limit': '25'
+}, headers = headers)
+
+print(r.json())
 
 ```
 
@@ -1330,6 +1665,19 @@ Content-Type: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('/v2/odsInstanceContexts', headers = headers)
+
+print(r.json())
+
+```
+
 `POST /v2/odsInstanceContexts`
 
 > Body parameter
@@ -1371,6 +1719,19 @@ oauth ( Scopes: api )
 GET /v2/odsInstanceContexts/{id} HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/odsInstanceContexts/{id}', headers = headers)
+
+print(r.json())
 
 ```
 
@@ -1421,6 +1782,19 @@ Content-Type: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.put('/v2/odsInstanceContexts/{id}', headers = headers)
+
+print(r.json())
+
+```
+
 `PUT /v2/odsInstanceContexts/{id}`
 
 > Body parameter
@@ -1465,6 +1839,18 @@ DELETE /v2/odsInstanceContexts/{id} HTTP/1.1
 
 ```
 
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('/v2/odsInstanceContexts/{id}', headers = headers)
+
+print(r.json())
+
+```
+
 `DELETE /v2/odsInstanceContexts/{id}`
 
 <h3 id="deletes-an-existing-odsinstancecontext-using-the-resource-identifier.-parameters">Parameters</h3>
@@ -1498,6 +1884,19 @@ oauth ( Scopes: api )
 GET /v2/claimSets/{id} HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/claimSets/{id}', headers = headers)
+
+print(r.json())
 
 ```
 
@@ -1631,6 +2030,21 @@ Accept: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/claimSets', params={
+  'offset': '0',  'limit': '25'
+}, headers = headers)
+
+print(r.json())
+
+```
+
 `GET /v2/claimSets`
 
 <h3 id="retrieves-all-claimsets.-parameters">Parameters</h3>
@@ -1703,6 +2117,19 @@ Content-Type: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('/v2/claimSets/{claimSetId}/resourceClaimActions', headers = headers)
+
+print(r.json())
+
+```
+
 `POST /v2/claimSets/{claimSetId}/resourceClaimActions`
 
 > Body parameter
@@ -1750,6 +2177,19 @@ oauth ( Scopes: api )
 PUT /v2/claimSets/{claimSetId}/resourceClaimActions/{resourceClaimId} HTTP/1.1
 
 Content-Type: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.put('/v2/claimSets/{claimSetId}/resourceClaimActions/{resourceClaimId}', headers = headers)
+
+print(r.json())
 
 ```
 
@@ -1801,6 +2241,18 @@ DELETE /v2/claimSets/{claimSetId}/resourceClaimActions/{resourceClaimId} HTTP/1.
 
 ```
 
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('/v2/claimSets/{claimSetId}/resourceClaimActions/{resourceClaimId}', headers = headers)
+
+print(r.json())
+
+```
+
 `DELETE /v2/claimSets/{claimSetId}/resourceClaimActions/{resourceClaimId}`
 
 <h3 id="deletes-an-existing-claimset-using-the-resource-identifier.-parameters">Parameters</h3>
@@ -1835,6 +2287,19 @@ oauth ( Scopes: api )
 GET /v2/authorizationStrategies HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/authorizationStrategies', headers = headers)
+
+print(r.json())
 
 ```
 
@@ -1890,6 +2355,21 @@ oauth ( Scopes: api )
 GET /v2/applications?offset=0&limit=25 HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/applications', params={
+  'offset': '0',  'limit': '25'
+}, headers = headers)
+
+print(r.json())
 
 ```
 
@@ -1973,6 +2453,20 @@ Accept: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('/v2/applications', headers = headers)
+
+print(r.json())
+
+```
+
 `POST /v2/applications`
 
 > Body parameter
@@ -2038,6 +2532,19 @@ Accept: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/applications/{id}', headers = headers)
+
+print(r.json())
+
+```
+
 `GET /v2/applications/{id}`
 
 <h3 id="retrieves-a-specific-application-based-on-the-identifier.-parameters">Parameters</h3>
@@ -2094,6 +2601,19 @@ Content-Type: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.put('/v2/applications/{id}', headers = headers)
+
+print(r.json())
+
+```
+
 `PUT /v2/applications/{id}`
 
 > Body parameter
@@ -2147,6 +2667,18 @@ DELETE /v2/applications/{id} HTTP/1.1
 
 ```
 
+```python
+import requests
+headers = {
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.delete('/v2/applications/{id}', headers = headers)
+
+print(r.json())
+
+```
+
 `DELETE /v2/applications/{id}`
 
 <h3 id="deletes-an-existing-application-using-the-resource-identifier.-parameters">Parameters</h3>
@@ -2178,6 +2710,19 @@ oauth ( Scopes: api )
 PUT /v2/applications/{id}/reset-credential HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.put('/v2/applications/{id}/reset-credential', headers = headers)
+
+print(r.json())
 
 ```
 
@@ -2227,6 +2772,21 @@ oauth ( Scopes: api )
 GET /v2/actions?offset=0&limit=25 HTTP/1.1
 
 Accept: application/json
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/v2/actions', params={
+  'offset': '0',  'limit': '25'
+}, headers = headers)
+
+print(r.json())
 
 ```
 
@@ -2296,6 +2856,19 @@ Accept: application/json
 
 ```
 
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.get('/', headers = headers)
+
+print(r.json())
+
+```
+
 `GET /`
 
 > Example responses
@@ -2331,6 +2904,19 @@ oauth ( Scopes: api )
 POST /connect/register HTTP/1.1
 
 Content-Type: application/x-www-form-urlencoded
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('/connect/register', headers = headers)
+
+print(r.json())
 
 ```
 
@@ -2377,6 +2963,19 @@ oauth ( Scopes: api )
 POST /connect/token HTTP/1.1
 
 Content-Type: application/x-www-form-urlencoded
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded',
+  'Authorization': 'Bearer {access-token}'
+}
+
+r = requests.post('/connect/token', headers = headers)
+
+print(r.json())
 
 ```
 
