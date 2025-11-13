@@ -354,7 +354,7 @@ jobs:
         uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567  # v3.3.0
         with:
           username: ${{ env.DOCKER_USERNAME }}
-          password: ${{ env.DOCKER_HUB_TOKEN }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Extract metadata (tags, labels) for admin api image
         id: metaapi
